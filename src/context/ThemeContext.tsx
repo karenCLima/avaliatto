@@ -1,5 +1,5 @@
 import { createContext, useState } from "react";
-import { ThemeProvider } from "@mui/material/styles";
+import { Experimental_CssVarsProvider as CssVarsProvider } from "@mui/material/styles";
 import { lightTheme, darkTheme } from "../theme/theme";
 import type { ReactNode } from "react";
 
@@ -20,9 +20,9 @@ export const ThemeContextProvider = ({ children }: { children: ReactNode }) => {
 
   return (
     <ThemeContext.Provider value={{ toggleTheme, isDarkMode }}>
-      <ThemeProvider theme={isDarkMode ? darkTheme : lightTheme}>
+      <CssVarsProvider theme={isDarkMode ? darkTheme : lightTheme}>
         {children}
-      </ThemeProvider>
+      </CssVarsProvider>
     </ThemeContext.Provider>
   );
 };

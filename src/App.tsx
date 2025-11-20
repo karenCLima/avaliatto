@@ -1,5 +1,7 @@
-import { ThemeToggleButton } from "./component/ThemeToggleButton"
-
+import Header from "./component/Header"
+import "./styles/global.css"
+import { BrowserRouter } from "react-router-dom";
+import AppRoutes  from "./routes/AppRoutes";
 
 
 function App() {
@@ -7,8 +9,10 @@ function App() {
 
   return (
     <>
-      
-      <ThemeToggleButton/>
+    <BrowserRouter>
+      <Header/>
+      <AppRoutes/>
+    </BrowserRouter>
       
     </>
   )
