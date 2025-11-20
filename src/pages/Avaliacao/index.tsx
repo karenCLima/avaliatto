@@ -1,0 +1,5 @@
+const Avaliacao = () => {
+  return <h1>Página inicial</h1>;
+};
+
+export default Avaliacao;
