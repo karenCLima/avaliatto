@@ -20,6 +20,7 @@ const TextButton =({onClick, color,hoverColor, children }: TextButtonProps)=>{
                 "&:hover": {
                     color: hoverColor, 
                     backgroundColor: "transparent",
+                    textShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px",
                 }
             }}
         >

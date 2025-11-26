@@ -1,6 +1,5 @@
 import styles from "./styles.module.css"
 import QuizIcon from '@mui/icons-material/Quiz';
-import Button from '@mui/material/Button';
 import Avatar from '@mui/material/Avatar';
 import { useNavigate } from "react-router-dom";
 import TextButton from "../TextButton";
@@ -18,7 +17,7 @@ const Header = () =>{
                     <TextButton 
                         onClick={() => navigate("/")}
                         color="background.default"
-                        hoverColor="secondary.light"
+                        hoverColor="text.primary"
                         >
                         Dashboard
                     </TextButton>
@@ -26,14 +25,14 @@ const Header = () =>{
                     <TextButton 
                         onClick={() => navigate("/avaliacao")}
                         color="background.default"
-                        hoverColor="secondary.light"
+                        hoverColor="text.primary"
                         >
                         Avaliação
                     </TextButton>
                     <TextButton 
                         onClick={() => navigate("/sobre")}
                         color="background.default"
-                        hoverColor="secondary.light"
+                        hoverColor="text.primary"
                         >
                         Sobre
                     </TextButton>
