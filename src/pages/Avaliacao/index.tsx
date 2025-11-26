@@ -4,7 +4,9 @@ import IconTextButton from "../../component/IconTextButton";
 
 const Avaliacao = () => {
   return (
-    <SideMenu>
+    <SideMenu 
+      titleText="Avaliação"
+    >
       <IconTextButton
           onClick={() => {}}
           color="background.default"
