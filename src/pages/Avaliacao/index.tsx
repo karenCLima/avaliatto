@@ -1,5 +1,26 @@
+import SideMenu from "../../component/SideMenu";
+import HomeIcon from "@mui/icons-material/Home";
+import IconTextButton from "../../component/IconTextButton";
+
 const Avaliacao = () => {
-  return <h1>Página inicial</h1>;
+  return (
+    <SideMenu>
+      <IconTextButton
+          onClick={() => {}}
+          color="background.default"
+          hoverColor="text.primary"
+          icon={<HomeIcon />}>
+            Início
+      </IconTextButton>
+      <IconTextButton
+          onClick={() => {}}
+          color="background.default"
+          hoverColor="text.primary"
+          icon={<HomeIcon />}>
+            Início
+      </IconTextButton>
+    </SideMenu>
+  )
 };
 
 export default Avaliacao;
