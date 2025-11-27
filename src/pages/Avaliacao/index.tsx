@@ -10,14 +10,14 @@ const Avaliacao = () => {
       <IconTextButton
           onClick={() => {}}
           color="background.default"
-          hoverColor="text.primary"
+          hoverColor="text.secondary"
           icon={<HomeIcon />}>
             Início
       </IconTextButton>
       <IconTextButton
           onClick={() => {}}
           color="background.default"
-          hoverColor="text.primary"
+          hoverColor="text.secondary"
           icon={<HomeIcon />}>
             Início
       </IconTextButton>

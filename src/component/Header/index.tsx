@@ -17,7 +17,7 @@ const Header = () =>{
                     <TextButton 
                         onClick={() => navigate("/")}
                         color="background.default"
-                        hoverColor="text.primary"
+                        hoverColor="text.secondary"
                         >
                         Dashboard
                     </TextButton>
@@ -25,14 +25,14 @@ const Header = () =>{
                     <TextButton 
                         onClick={() => navigate("/avaliacao")}
                         color="background.default"
-                        hoverColor="text.primary"
+                        hoverColor="text.secondary"
                         >
                         Avaliação
                     </TextButton>
                     <TextButton 
                         onClick={() => navigate("/sobre")}
                         color="background.default"
-                        hoverColor="text.primary"
+                        hoverColor="text.secondary"
                         >
                         Sobre
                     </TextButton>
