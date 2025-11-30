@@ -18,11 +18,14 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
 import { ThemeToggleButton } from '../../component/ThemeToggleButton';
 import Avatar from '@mui/material/Avatar';
 import NoteAddIcon from '@mui/icons-material/NoteAdd';
+import DashboardIcon from '@mui/icons-material/Dashboard';
+import PeopleIcon from '@mui/icons-material/People';
+import SettingsIcon from '@mui/icons-material/Settings';
+import StarIcon from '@mui/icons-material/Star';
+import Button from '@mui/material/Button';
 
 const drawerWidth = 240;
 
@@ -161,8 +164,14 @@ export default function Avaliacao() {
         </DrawerHeader>
         <Divider />
         <List>
-          {['Criar Nova Avaliação', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-            <ListItem key={text} disablePadding sx={{ display: 'block' }}>
+          {[
+  { text: "Dashboard", icon: <DashboardIcon /> },
+  { text: "Criar Nova Avaliação", icon: <NoteAddIcon /> },
+  { text: "Funcionários", icon: <PeopleIcon /> },
+  { text: "Favoritos", icon: <StarIcon /> },
+  { text: "Configurações", icon: <SettingsIcon /> },
+].map((item) => (
+            <ListItem key={item.text} disablePadding sx={{ display: 'block' }}>
               <ListItemButton
                 sx={[
                   {
@@ -194,10 +203,10 @@ export default function Avaliacao() {
                         },
                   ]}
                 >
-                  {index % 2 === 0 ? <NoteAddIcon/> : <MailIcon />}
+                  {item.icon}
                 </ListItemIcon>
                 <ListItemText
-                  primary={text}
+                  primary={item.text}
                   sx={[
                     open
                       ? {
@@ -214,8 +223,10 @@ export default function Avaliacao() {
         </List>
         <Divider />
         <List>
-          {['All mail', 'Trash', 'Spam'].map((text, index) => (
-            <ListItem key={text} disablePadding sx={{ display: 'block' }}>
+          {[{ text: "Funcionários", icon: <PeopleIcon /> },
+            { text: "Favoritos", icon: <StarIcon /> },
+            { text: "Configurações", icon: <SettingsIcon /> },].map((item) => (
+            <ListItem key={item.text} disablePadding sx={{ display: 'block' }}>
               <ListItemButton
                 sx={[
                   {
@@ -236,6 +247,7 @@ export default function Avaliacao() {
                     {
                       minWidth: 0,
                       justifyContent: 'center',
+                      color: "secondary.main",
                     },
                     open
                       ? {
@@ -246,10 +258,10 @@ export default function Avaliacao() {
                         },
                   ]}
                 >
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                  {item.icon}
                 </ListItemIcon>
                 <ListItemText
-                  primary={text}
+                  primary={item.text}
                   sx={[
                     open
                       ? {
@@ -264,6 +276,33 @@ export default function Avaliacao() {
             </ListItem>
           ))}
         </List>
+        <Divider />
+        <Box sx={{ pt: 2, mx: "auto", width: "70%",}}>
+          <Button 
+          variant="contained" 
+          color="primary" 
+          sx={[
+            open
+              ? {
+                  opacity: 1,
+                }
+                : {
+                  opacity: 0,
+                },{
+                  width: "100%",  
+                  mx: "auto",          // largura de 70%
+                  borderRadius: "20px",    // bordas arredondadas
+                  color: "background.default",
+                  fontWeight: "bold",
+                  "&:hover": {
+                    color: "primary.main",
+                    backgroundColor: "transparent",
+                    textShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px",
+                  }},
+                    ]}>
+            logout
+          </Button>
+        </Box>
       </Drawer>
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
         <DrawerHeader />
