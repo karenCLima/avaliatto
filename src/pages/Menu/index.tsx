@@ -1,10 +1,10 @@
 import * as React from 'react';
-import { styled, useTheme} from '@mui/material/styles';
+import { styled, useTheme } from '@mui/material/styles';
 import type { Theme, CSSObject } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import MuiDrawer from '@mui/material/Drawer';
 import MuiAppBar from '@mui/material/AppBar';
-import type {AppBarProps as MuiAppBarProps} from '@mui/material/AppBar';
+import type { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import List from '@mui/material/List';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -25,6 +25,8 @@ import SettingsIcon from '@mui/icons-material/Settings';
 import StarIcon from '@mui/icons-material/Star';
 import Button from '@mui/material/Button';
 import type { ReactNode } from "react";
+import TextButton from '../../component/TextButton';
+import { useNavigate } from "react-router-dom";
 
 export interface MenuItem {
   text: string;
@@ -120,200 +122,225 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
     ],
   }),
 );
-const Menu = ({menuItems, children}: MenuLateralProps)=>{
-    const theme = useTheme();
-      const [open, setOpen] = React.useState(false);
-    
-      const handleDrawerOpen = () => {
-        setOpen(true);
-      };
-    
-      const handleDrawerClose = () => {
-        setOpen(false);
-      };
-    
-      return (
-        <Box sx={{ display: 'flex' }}>
-          <CssBaseline />
-          <AppBar position="fixed" open={open}>
-            <Toolbar>
-              <IconButton
-                color="inherit"
-                aria-label="open drawer"
-                onClick={handleDrawerOpen}
-                edge="start"
+const Menu = ({ menuItems, children }: MenuLateralProps) => {
+  const navigate = useNavigate();
+  const theme = useTheme();
+  const [open, setOpen] = React.useState(false);
+
+  const handleDrawerOpen = () => {
+    setOpen(true);
+  };
+
+  const handleDrawerClose = () => {
+    setOpen(false);
+  };
+
+  return (
+    <Box sx={{ display: 'flex' }}>
+      <CssBaseline />
+      <AppBar position="fixed" open={open} sx={{ backgroundColor: "background.default" }}  >
+        <Toolbar>
+          <IconButton
+            color="inherit"
+            aria-label="open drawer"
+            onClick={handleDrawerOpen}
+            edge="start"
+            sx={[
+              {
+                marginRight: 5,
+                color: "primary.main"
+              },
+              open && { display: 'none' },
+            ]}
+          >
+            <MenuIcon />
+          </IconButton>
+          <Typography variant="h5" noWrap component="div" sx={{color: "primary.main"}}>
+            Avaliatto
+          </Typography>
+          <Box sx={{ ml: "auto", display: "flex", alignItems: "center", gap: 2 }}>
+            <TextButton
+              onClick={() => navigate("/")}
+              color="sprimary.main"
+              hoverColor="secondary.main"
+            >
+              Dashboard
+            </TextButton>
+
+            <TextButton
+              onClick={() => navigate("/avaliacao")}
+              color="primary.main"
+              hoverColor="secondary.main"
+            >
+              Avaliação
+            </TextButton>
+            <TextButton
+              onClick={() => navigate("/sobre")}
+              color="primary.main"
+              hoverColor="secondary.main"
+            >
+              Sobre
+            </TextButton>
+            <ThemeToggleButton />
+            <Avatar
+              sx={{ bgcolor: "primary.main" }}
+              alt="Karen Lima"
+              src="/broken-image.jpg"
+            />
+          </Box>
+
+        </Toolbar>
+      </AppBar>
+      <Drawer variant="permanent" open={open}>
+        <DrawerHeader>
+          <IconButton onClick={handleDrawerClose}>
+            {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
+          </IconButton>
+        </DrawerHeader>
+        <Divider />
+        <List>
+          {
+            menuItems.map((item) => (
+              <ListItem key={item.text} disablePadding sx={{ display: 'block' }}>
+                <ListItemButton
+                  sx={[
+                    {
+                      minHeight: 48,
+                      px: 2.5,
+                    },
+                    open
+                      ? {
+                        justifyContent: 'initial',
+                      }
+                      : {
+                        justifyContent: 'center',
+                      },
+                  ]}
+                >
+                  <ListItemIcon
+                    sx={[
+                      {
+                        minWidth: 0,
+                        justifyContent: 'center',
+                        color: "secondary.main",
+                      },
+                      open
+                        ? {
+                          mr: 3,
+                        }
+                        : {
+                          mr: 'auto',
+                        },
+                    ]}
+                  >
+                    {item.icon}
+                  </ListItemIcon>
+                  <ListItemText
+                    primary={item.text}
+                    sx={[
+                      open
+                        ? {
+                          opacity: 1,
+                        }
+                        : {
+                          opacity: 0,
+                        },
+                    ]}
+                  />
+                </ListItemButton>
+              </ListItem>
+            ))}
+        </List>
+        <Divider />
+        <List>
+          {[{ text: "Funcionários", icon: <PeopleIcon /> },
+          { text: "Favoritos", icon: <StarIcon /> },
+          { text: "Configurações", icon: <SettingsIcon /> },].map((item) => (
+            <ListItem key={item.text} disablePadding sx={{ display: 'block' }}>
+              <ListItemButton
                 sx={[
                   {
-                    marginRight: 5,
+                    minHeight: 48,
+                    px: 2.5,
                   },
-                  open && { display: 'none' },
-                ]}
-              >
-                <MenuIcon />
-              </IconButton>
-              <Typography variant="h6" noWrap component="div">
-                Mini variant drawer
-              </Typography>
-              <Box sx={{ ml: "auto", display: "flex", alignItems: "center", gap: 2 }}>
-                  <ThemeToggleButton />
-                  <Avatar
-                    sx={{ bgcolor: "secondary.main" }}
-                    alt="Karen Lima"
-                    src="/broken-image.jpg"
-                  />
-              </Box>
-                              
-            </Toolbar>
-          </AppBar>
-          <Drawer variant="permanent" open={open}>
-            <DrawerHeader>
-              <IconButton onClick={handleDrawerClose}>
-                {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
-              </IconButton>
-            </DrawerHeader>
-            <Divider />
-            <List>
-              {
-    menuItems.map((item) => (
-                <ListItem key={item.text} disablePadding sx={{ display: 'block' }}>
-                  <ListItemButton
-                    sx={[
-                      {
-                        minHeight: 48,
-                        px: 2.5,
-                      },
-                      open
-                        ? {
-                            justifyContent: 'initial',
-                          }
-                        : {
-                            justifyContent: 'center',
-                          },
-                    ]}
-                  >
-                    <ListItemIcon
-                      sx={[
-                        {
-                          minWidth: 0,
-                          justifyContent: 'center',
-                          color: "secondary.main",
-                        },
-                        open
-                          ? {
-                              mr: 3,
-                            }
-                          : {
-                              mr: 'auto',
-                            },
-                      ]}
-                    >
-                      {item.icon}
-                    </ListItemIcon>
-                    <ListItemText
-                      primary={item.text}
-                      sx={[
-                        open
-                          ? {
-                              opacity: 1,
-                            }
-                          : {
-                              opacity: 0,
-                            },
-                      ]}
-                    />
-                  </ListItemButton>
-                </ListItem>
-              ))}
-            </List>
-            <Divider />
-            <List>
-              {[{ text: "Funcionários", icon: <PeopleIcon /> },
-                { text: "Favoritos", icon: <StarIcon /> },
-                { text: "Configurações", icon: <SettingsIcon /> },].map((item) => (
-                <ListItem key={item.text} disablePadding sx={{ display: 'block' }}>
-                  <ListItemButton
-                    sx={[
-                      {
-                        minHeight: 48,
-                        px: 2.5,
-                      },
-                      open
-                        ? {
-                            justifyContent: 'initial',
-                          }
-                        : {
-                            justifyContent: 'center',
-                          },
-                    ]}
-                  >
-                    <ListItemIcon
-                      sx={[
-                        {
-                          minWidth: 0,
-                          justifyContent: 'center',
-                          color: "secondary.main",
-                        },
-                        open
-                          ? {
-                              mr: 3,
-                            }
-                          : {
-                              mr: 'auto',
-                            },
-                      ]}
-                    >
-                      {item.icon}
-                    </ListItemIcon>
-                    <ListItemText
-                      primary={item.text}
-                      sx={[
-                        open
-                          ? {
-                              opacity: 1,
-                            }
-                          : {
-                              opacity: 0,
-                            },
-                      ]}
-                    />
-                  </ListItemButton>
-                </ListItem>
-              ))}
-            </List>
-            <Divider />
-            <Box sx={{ pt: 2, mx: "auto", width: "70%",}}>
-              <Button 
-              variant="contained" 
-              color="primary" 
-              sx={[
-                open
-                  ? {
-                      opacity: 1,
+                  open
+                    ? {
+                      justifyContent: 'initial',
                     }
                     : {
-                      opacity: 0,
-                    },{
-                      width: "100%",  
-                      mx: "auto",          // largura de 70%
-                      borderRadius: "20px",    // bordas arredondadas
-                      color: "background.default",
-                      fontWeight: "bold",
-                      "&:hover": {
-                        color: "primary.main",
-                        backgroundColor: "transparent",
-                        textShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px",
-                      }},
-                        ]}>
-                logout
-              </Button>
-            </Box>
-          </Drawer>
-          <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
-            <DrawerHeader />
-            {children}
-          </Box>
+                      justifyContent: 'center',
+                    },
+                ]}
+              >
+                <ListItemIcon
+                  sx={[
+                    {
+                      minWidth: 0,
+                      justifyContent: 'center',
+                      color: "secondary.main",
+                    },
+                    open
+                      ? {
+                        mr: 3,
+                      }
+                      : {
+                        mr: 'auto',
+                      },
+                  ]}
+                >
+                  {item.icon}
+                </ListItemIcon>
+                <ListItemText
+                  primary={item.text}
+                  sx={[
+                    open
+                      ? {
+                        opacity: 1,
+                      }
+                      : {
+                        opacity: 0,
+                      },
+                  ]}
+                />
+              </ListItemButton>
+            </ListItem>
+          ))}
+        </List>
+        <Divider />
+        <Box sx={{ pt: 2, mx: "auto", width: "70%", }}>
+          <Button
+            variant="contained"
+            color="primary"
+            sx={[
+              open
+                ? {
+                  opacity: 1,
+                }
+                : {
+                  opacity: 0,
+                }, {
+                width: "100%",
+                mx: "auto",          // largura de 70%
+                borderRadius: "20px",    // bordas arredondadas
+                color: "background.default",
+                fontWeight: "bold",
+                "&:hover": {
+                  color: "primary.main",
+                  backgroundColor: "transparent",
+                  textShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px",
+                }
+              },
+            ]}>
+            logout
+          </Button>
         </Box>
-      );
+      </Drawer>
+      <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+        <DrawerHeader />
+        {children}
+      </Box>
+    </Box>
+  );
 }
 
 export default Menu

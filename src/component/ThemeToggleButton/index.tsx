@@ -9,7 +9,7 @@ export function ThemeToggleButton() {
 
   return (
     <IconButton onClick={toggleTheme} color="inherit">
-      {isDarkMode ? <Brightness7Icon /> : <Brightness4Icon />}
+      {isDarkMode ? <Brightness7Icon sx={{color: "primary.main"}} /> : <Brightness4Icon sx={{color: "primary.main"}} />}
     </IconButton>
   );
 }
